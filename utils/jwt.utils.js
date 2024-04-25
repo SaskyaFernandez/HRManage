@@ -1,51 +1,40 @@
 import jwt from 'jsonwebtoken';
 
-export const generateJwt = ({ id, email, role }) => {
-    return new Promise((resolve, reject) => {
-        // Donnée pour le token
-        const data = { id, email, role };
-        const secret = process.env.JWT_SECRET
-        const options = {
-            algorithm: 'HS512',
-            expiresIn: '12h', // Format : https://github.com/vercel/ms
-            audience: process.env.JWT_AUDIENCE,
-            issuer: process.env.JWT_ISSUER
-        };
+const JWTCrypting = async (userId) => {
+    const token = await jwtTokenCrypted(userId)
+    return await jwtTokenDecrypted(token);
+}
 
-        // Générer le token
-        jwt.sign(data, secret, options, (error, token) => {
-            // Gestion de l'erreur de génération
-            if (error) {
-                reject(error);
-                return;
-            }
-
-            // Envoi du token
-            resolve(token);
-        })
-    });
-};
-
-export const decodeJwt = (token) => {
-
-    return new Promise((resolve, reject) => {
-
-        // Donnée pour valider le token
-        const secret = process.env.JWT_SECRET;
-        const options = {
-            audience: process.env.JWT_AUDIENCE,
-            issuer: process.env.JWT_ISSUER
+// ? token generation method
+const jwtTokenCrypted = async (userId) => {
+    try {
+        let payload = {
+            userId: userId
         }
 
-        // Valide le token
-        jwt.verify(token, secret, options, (error, data) => {
-            if (error) {
-                reject(error);
-                return;
-            }
+        const token = await jwt.sign(
+            payload,
+            process.env.ACCESS_TOKEN_SECRET);
+        return token;
 
-            resolve(data);
-        });
-    });
+    } catch (error) {
+        console.log(error);
+    }
+
+
+};
+
+// ? method for decrypting the token
+
+const jwtTokenDecrypted = async (token) => {
+    try {
+        const payload = await jwt.verify(
+            token.toString(),
+            process.env.ACCESS_TOKEN_SECRET);
+        return payload;
+    } catch (error) {
+        console.log(error);
+    }
 
 }
+export { JWTCrypting, jwtTokenCrypted, jwtTokenDecrypted };
