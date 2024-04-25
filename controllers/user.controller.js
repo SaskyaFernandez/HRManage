@@ -30,20 +30,16 @@ const userController = {
     usersFromId: async (req, res) => {
         try {
             const userId = parseInt(req.params.id);
-            const user = users.find((elem) => elem.id === userId);
-            console.log(userId);
-            
-            if (!user) {
-                res.status(404).send({ error: 'User not found!' })
-            }
-
             const viewData = {
-                user: await usersServices.
+                userById: await usersServices.getUserById(userId)
             };
-
+            if (!viewData.userById) {
+                res.status(404).send({ error: 'User not found!' });
+                return;
+            }
             res.send(viewData);
         } catch (error) {
-            res.status(500).send(error.message);
+            res.status(500).send(`error: ${error.message}`);
         }
     }
 };

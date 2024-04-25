@@ -10,8 +10,9 @@ const usersServices = {
         const users = await db.Users.findAll();
         return users.map(user => user.firstname)
     },
-    getUserById: async () => {
-        
+    getUserById: async (id) => {
+        const users = await db.Users.findOne({ where: { id: id } });
+        return users;
     }
 }
 export default usersServices;
