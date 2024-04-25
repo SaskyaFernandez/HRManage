@@ -2,7 +2,7 @@ import express from 'express';
 import userRouter from './routes/users.router.js';
 import expressJSDocSwagger from 'express-jsdoc-swagger';
 import swaggerOption from './swagger.option.js';
-
+import authRouter from './routes/Auth.router.js';
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -10,10 +10,13 @@ const port = process.env.PORT || 3000;
 //* Add swagger
 expressJSDocSwagger(app)(swaggerOption);
 
-// Import des routers
-app.use('/api/users', userRouter);
+app.use(express.json()) 
 
-// Démarrage du serveur
+// Import routers
+app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
+
+// Start server
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
