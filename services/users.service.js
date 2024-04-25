@@ -8,11 +8,15 @@ const usersServices = {
     },
     getAll: async () =>{
         const users = await db.Users.findAll();
-        return users.map(user => user.firstname)
+        return users.map(user => user)
     },
     getUserById: async (id) => {
-        const users = await db.Users.findOne({ where: { id: id } });
-        return users;
+        const user = await db.Users.findOne({ where: { id: id } });
+        return user;
+    },
+    getUserByEmail: async (email) => {
+        const user = await db.Users.findOne({ where: { email: email } });
+        return user;
     }
 }
 export default usersServices;
