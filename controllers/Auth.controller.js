@@ -1,38 +1,33 @@
-import memberService from '../services/member.service.js';
-import { generateJwt } from '../utils/jwt.utils.js';
+import { jwtTokenCrypted } from '../utils/jwt.utils.js';
+import usersServices from "../services/users.service.js";
 
 const authController = {
 
     login: async (req, res) => {
-        const data = req.body;
+        try {
+            //? 1. recup body
+            const { email, password } = req.body;
+            //? 2. verif si user extiste
+            const user = await usersServices.getUserByEmail(email);
+            if (!user) {
+                res.status(404).send({ error: 'User not found!' });
+                return;
+            }
+            //? 3. verif pswd
 
-        // Validation
-        if (!data || !data.email || !data.password) {
-            res.status(422)
-                .json({
-                    errorMessage: 'Invalid data'
-                });
-            return;
+            if (user.password !== password ) {
+                res.status(401).send({ error: 'Wrong password !' });
+                return;
+            }
+
+            //? 4. envoyer token 
+            res.send(await jwtTokenCrypted(user.id));
+        } catch (error) {
+            // res.status(500).send('Internal Server Error');
+            return console.log("aled");
         }
-
-        // Login via le service
-        const user = memberService.login(data.email, data.password);
-
-        if (!user) {
-            res.status(400)
-                .json({
-                    errorMessage: 'Invalid credential'
-                });
-            return;
-        }
-
-        // Générer le JWT
-        const token = await generateJwt(user);
-
-        // Envoi du token
-        res.status(200)
-            .json({ token });
     }
 }
+
 
 export default authController;
