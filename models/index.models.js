@@ -2,18 +2,17 @@ import { Sequelize } from 'sequelize';
 import usersBuilder from './users.models.js';
 const sequelize = new Sequelize(process.env.DB_URI);
 
-// L'objet "db"
-//* Initialisation
+// The "db" object
+//* Initialization
 const db = {};
 
-// //* Injection de l'instance de sequelize
+//* Injecting the sequelize instance
 db.sequelize = sequelize;
 
-// //* Ajouter les modeles
+//* Add models
 db.Users = usersBuilder(sequelize);
 
-
-//* Export de l'objet DB
+//* Export DB object
 export default db;
 
 (async () => {
@@ -21,6 +20,6 @@ export default db;
         await sequelize.authenticate();
 
     } catch (error) {
-        console.error('Impossible de se connecter à la base de données :', error);
+        console.error('Unable to connect to database :', error);
     }
 })();
