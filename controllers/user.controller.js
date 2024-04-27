@@ -1,5 +1,6 @@
+import bcrypt from "bcryptjs/dist/bcrypt.js";
+import { UserRegisterDTO } from "../dto/userRegister.dto.js";
 import usersServices from "../services/users.service.js";
-
 const userController = {
     /**
      * GET /api/users/
@@ -10,12 +11,12 @@ const userController = {
      */
     allUsers: async (req, res) => {
         try {
-            const viewData = {
+            const userData = {
                 users: await usersServices.getAll()
             };
-            res.send(viewData);
+            res.json(userData);
         } catch (error) {
-            res.status(500).send('Internal Server Error');
+            res.status(500).json({error: 'Internal Server Error'});
         }
     },
 
@@ -30,17 +31,55 @@ const userController = {
     usersFromId: async (req, res) => {
         try {
             const userId = parseInt(req.params.id);
-            const viewData = {
+            const userData = {
                 userById: await usersServices.getUserById(userId)
             };
-            if (!viewData.userById) {
-                res.status(404).send({ error: 'User not found!' });
+            if (!userData.userById) {
+                res.status(404).json({ error: 'User not found!' });
                 return;
             }
-            res.send(viewData);
+            res.json(userData);
         } catch (error) {
-            res.status(500).send(`error: ${error.message}`);
+            res.status(500).json({ error:error.message });
         }
+    },
+    /**
+    * POST /api/users/
+    * @summary Register an employee
+    * @tags users
+    * @param {UserRegisterDTO} request.body.required - user - application/json
+    * @return 404 - User not found
+    */
+    createUser: async (req, res) => {
+        try {
+            const userDTO = new UserRegisterDTO({ ...req.body });
+
+            const userExist = await usersServices.getUserByEmail(userDTO.email);
+            if (userExist) {
+                return res.status(400).json({ error: "Email already used" });
+            };
+
+            const regex = new RegExp('[\\w\\-\\.]+@([\\w-]+\\.)+[\\w-]{2,}');
+            const emailFormat = regex.test(userDTO.email);
+            if (!emailFormat) {
+                return res.status(400).json({ error:`Email don't respect the good format`});
+            };
+
+            userDTO.isdeleted = false;
+            userDTO.holidaysleft = userDTO.maxholidays;
+
+            userDTO.password = await bcrypt.hash(userDTO.password, 10);
+
+            const user = await usersServices.add(userDTO);
+            if (!user) {
+                return res.status(500).json({ error:`User informations not complet`});
+            };
+
+            return res.status(200).json({message:`The user has been successfully registered `});
+
+        } catch (error) {
+            return res.status(500).json({error: error.message});
+        };
     }
 };
 
