@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
-import usersBuilder from './users.models.js';
+import user from './users.models.js';
+import holiday from './holidays.models.js';
 const sequelize = new Sequelize(process.env.DB_URI);
 
 // The "db" object
@@ -10,7 +11,8 @@ const db = {};
 db.sequelize = sequelize;
 
 //* Add models
-db.Users = usersBuilder(sequelize);
+db.Users = user(sequelize);
+db.holidays = holiday(sequelize);
 
 //* Export DB object
 export default db;
