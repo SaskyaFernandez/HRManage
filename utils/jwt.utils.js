@@ -1,39 +1,25 @@
 import jwt from 'jsonwebtoken';
 
-const JWTCrypting = async (userId) => {
-    const token = await jwtTokenCrypted(userId)
-    return await jwtTokenDecrypted(token);
-}
-
 // ? token generation method
-const jwtTokenCrypted = async (userId) => {
-    try {
-        let payload = {
-            userId: userId
-        }
-
-        const token = await jwt.sign(
-            payload,
-            process.env.ACCESS_TOKEN_SECRET);
-        return token;
-
-    } catch (error) {
-        console.log(error);
+const jwtTokenCrypted = (userId) => {
+    let payload = {
+        userId: userId
     }
 
-
+    const token = jwt.sign(
+        payload,
+        process.env.ACCESS_TOKEN_SECRET);
+    
+    return token;
 };
+
 // ? method for decrypting the token
-
-const jwtTokenDecrypted = async (token) => {
-    try {
-        const payload = await jwt.verify(
-            token.toString(),
-            process.env.ACCESS_TOKEN_SECRET);
-        return payload;
-    } catch (error) {
-        console.log(error);
-    }
-
+const jwtTokenDecrypted = (token) => {
+    const payload = jwt.verify(
+        token.toString(),
+        process.env.ACCESS_TOKEN_SECRET);
+    
+    return payload;
 }
-export { JWTCrypting, jwtTokenCrypted, jwtTokenDecrypted };
+
+export { jwtTokenCrypted, jwtTokenDecrypted };
