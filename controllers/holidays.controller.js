@@ -12,7 +12,7 @@ const userController = {
         try {
         
         } catch (error) {
-            res.status(500).send('Internal Server Error');
+            res.status(500).json({ error:'Internal Server Error'});
         }
     }
 };

@@ -6,7 +6,7 @@ const middlewareAuthentification = async (req, res, next) => {
 
     const token = authHeader && authHeader.split(' ')[1];
     if (!token) {
-        return res.status(403).send("Access denied.");
+        return res.status(403).json({ error:"Access denied."});
     }
     
     try {
@@ -15,7 +15,7 @@ const middlewareAuthentification = async (req, res, next) => {
         next();
     } catch (error) {
 
-        return res.status(403).send("Token invalid.");
+        return res.status(403).json({error:"Token invalid."});
     }
 };
 

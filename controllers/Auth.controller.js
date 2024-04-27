@@ -1,5 +1,6 @@
 import { jwtTokenCrypted } from '../utils/jwt.utils.js';
 import usersServices from "../services/users.service.js";
+import bcrypt from 'bcryptjs/dist/bcrypt.js';
 
 /**
  * User
@@ -21,18 +22,18 @@ const authController = {
             const { email, password } = req.body;
             const user = await usersServices.getUserByEmail(email);
             if (!user) {
-                res.status(404).send({ error: 'User not found!' });
+                res.status(404).json({ error: 'User not found!' });
                 return;
             }
+            let result = await bcrypt.compare(password, user.password);
 
-            if (user.password !== password) {
-                res.status(401).send({ error: 'Wrong password !' });
-                return;
+            if (!result) {
+                return res.status(401).json({ error: 'Wrong password !' });
             }
 
-            res.status(200).json(await jwtTokenCrypted(user.id));
+            res.status(200).json(jwtTokenCrypted(user.id));
         } catch (error) {
-            res.status(500).send('Internal Server Error');
+            res.status(500).json('Internal Server Error');
             return;
         }
     }
