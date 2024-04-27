@@ -1,30 +1,39 @@
 import { jwtTokenCrypted } from '../utils/jwt.utils.js';
 import usersServices from "../services/users.service.js";
 
-const authController = {
+/**
+ * User
+ * @typedef {object} userLogin
+ * @property {string} email
+ * @property {string} password
+*/
 
+const authController = {
+    /**
+       * POST /api/auth/login/
+       * @summary login 
+       * @tags users
+       * @param {userLogin} request.body.required - user - application/json
+       * @return 404 - Not found
+    -*/
     login: async (req, res) => {
         try {
-            //? 1. recup body
             const { email, password } = req.body;
-            //? 2. verif si user extiste
             const user = await usersServices.getUserByEmail(email);
             if (!user) {
                 res.status(404).send({ error: 'User not found!' });
                 return;
             }
-            //? 3. verif pswd
 
-            if (user.password !== password ) {
+            if (user.password !== password) {
                 res.status(401).send({ error: 'Wrong password !' });
                 return;
             }
 
-            //? 4. envoyer token 
-            res.send(await jwtTokenCrypted(user.id));
+            res.status(200).json(await jwtTokenCrypted(user.id));
         } catch (error) {
-            // res.status(500).send('Internal Server Error');
-            return console.log("aled");
+            res.status(500).send('Internal Server Error');
+            return;
         }
     }
 }

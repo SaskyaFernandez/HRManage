@@ -23,7 +23,6 @@ const jwtTokenCrypted = async (userId) => {
 
 
 };
-
 // ? method for decrypting the token
 
 const jwtTokenDecrypted = async (token) => {

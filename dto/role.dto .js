@@ -1,5 +1,5 @@
 /**
- * User
+ * role
  * @typedef {object} roleDTO
  * @property {number} id
  * @property {string} name
