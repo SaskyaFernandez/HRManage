@@ -1,55 +1,36 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import {  DataTypes } from 'sequelize';
+import usersModels from './users.models.js';
 
 /**
- * Actor model
+ * Modèle d'Acteur
  * @param {Sequelize} sequelize
  * @returns
  */
 export default (sequelize) => {
 
-    const Holiday = sequelize.define('Holiday', {
+    const Holiday = sequelize.define('holiday', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        // userid: {
-        //     type: DataTypes.INTEGER,
-        //     references: {
-        //         model: users, // 'Actors' would also work
-        //         key: 'id',
-        //     },
-        // },
-        lastname: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        entrydate: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        isdeleted: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false
-        },
-        maxholidays: {
+        userid: {
             type: DataTypes.INTEGER,
+            references: {
+                model: usersModels,
+                key: 'id',
+            },
+        },
+        startdate: {
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
-        holidaysleft: {
-            type: DataTypes.INTEGER,
+        enddate: {
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
-        image: {
-            type: DataTypes.STRING
+        isaccepted: {
+            type: DataTypes.BOOLEAN
         }
     }, {
         freezeTableName: true,
@@ -58,5 +39,3 @@ export default (sequelize) => {
     });
     return Holiday;
 }
-
-

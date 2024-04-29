@@ -1,16 +1,14 @@
 /**
  * holiday
- * @typedef {object} holidayDTO
- * @property {number} id
+ * @typedef {object} holidayRequestDTO
  * @property {userDTO.id} userid
- * @property {date} startdate
- * @property {date} enddate
+ * @property {string} startdate
+ * @property {string} enddate
  * @property {boolean} isaccepted
 */
-export class holidayDTO {
+export class holidayRequestDTO {
 
-    constructor({ id, userid, startdate, enddate, isaccepted}) {
-        this.id = id;
+    constructor({ userid, startdate, enddate, isaccepted }) {
         this.userid = userid;
         this.startdate = startdate;
         this.enddate = enddate;
