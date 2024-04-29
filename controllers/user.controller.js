@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs/dist/bcrypt.js";
-import { UserRegisterDTO } from "../dto/userRegister.dto.js";
+import { userRegisterDTO } from "../dto/userRegister.dto.js";
 import usersServices from "../services/users.service.js";
 const userController = {
     /**
@@ -47,12 +47,12 @@ const userController = {
     * POST /api/users/
     * @summary Register an employee
     * @tags users
-    * @param {UserRegisterDTO} request.body.required - user - application/json
+    * @param {userRegisterDTO} request.body.required - user - application/json
     * @return 404 - User not found
     */
     createUser: async (req, res) => {
         try {
-            const userDTO = new UserRegisterDTO({ ...req.body });
+            const userDTO = new userRegisterDTO({ ...req.body });
 
             const userExist = await usersServices.getUserByEmail(userDTO.email);
             if (userExist) {

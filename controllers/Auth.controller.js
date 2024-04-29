@@ -19,6 +19,10 @@ const authController = {
     -*/
     login: async (req, res) => {
         try {
+            
+            //! payload => ajouter le role en string ex : "RH"
+            //* faire une enum avec les roles :') 
+            
             const { email, password } = req.body;
             const user = await usersServices.getUserByEmail(email);
             if (!user) {

@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS holidays;
+DROP TABLE IF EXISTS holiday;
 DROP TABLE IF EXISTS UserRoles;
 DROP TABLE IF EXISTS Roles;
 DROP TABLE IF EXISTS Users;
@@ -86,7 +86,8 @@ INSERT INTO UserRoles VALUES
 (15, 2, '2023-07-25', NULL);
 
 CREATE TABLE holiday (
-	id int NOT NULL,
+	id int GENERATED ALWAYS AS IDENTITY,
+		PRIMARY KEY(id),
 	CONSTRAINT fk_user
 		FOREIGN KEY (userId)
 			REFERENCES Users(id),
@@ -95,16 +96,18 @@ CREATE TABLE holiday (
 		FOREIGN KEY (userId)
 			REFERENCES Users(id),
 	startDate date NOT NULL,
-	endDate date NOT NULL
+	endDate date NOT NULL,
+	isaccepted bool 
 );
 
 INSERT INTO holiday VALUES
-(1, 1, '2024-05-01', '2024-05-03'),
-(2, 2, '2024-06-10', '2024-06-20'),
-(3, 3, '2024-07-15', '2024-07-20'),
-(4, 1, '2024-08-01', '2024-08-05'),
-(5, 2, '2024-09-03', '2024-09-10'),
-(6, 3, '2024-10-20', '2024-10-25'),
-(7, 1, '2024-11-15', '2024-11-20'),
-(8, 2, '2024-12-24', '2024-12-31');
-select * from holiday
+(default, 1, '2024-05-01', '2024-05-03',true),
+(default, 2, '2024-06-10', '2024-06-20',false),
+(default, 3, '2024-07-15', '2024-07-20',true),
+(default, 1, '2024-08-01', '2024-08-05',default),
+(default, 8, '2024-09-03', '2024-09-10',true),
+(default, 3, '2024-10-20', '2024-10-25',false),
+(default, 1, '2024-11-15', '2024-11-20',default),
+(default, 2, '2024-12-24', '2024-12-31',default);
+
+SELECT * FROM "holiday" AS "holiday";

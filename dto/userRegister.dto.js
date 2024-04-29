@@ -12,7 +12,7 @@
  * @property {number} holidaysleft
  * @property {string} image
 */
-export class UserRegisterDTO {
+export class userRegisterDTO {
 
     constructor({ firstname, lastname, email, password, role, entrydate, isdeleted, maxholidays, holidaysleft, image }) {
         this.firstname = firstname;

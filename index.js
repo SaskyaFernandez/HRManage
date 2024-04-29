@@ -4,6 +4,7 @@ import expressJSDocSwagger from 'express-jsdoc-swagger';
 import swaggerOption from './swagger.option.js';
 import authRouter from './routes/Auth.router.js';
 import { middlewareAuthentification } from './middleware/index.middleware.js';
+import holidaysRouter from './routes/holidays.router.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -13,6 +14,7 @@ app.use(express.json())
 app.use('/api/auth', authRouter);
 app.use(middlewareAuthentification);
 app.use('/api/users', userRouter);
+app.use('/api/holidays', holidaysRouter);
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
