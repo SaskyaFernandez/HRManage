@@ -51,7 +51,8 @@ INSERT INTO Users VALUES
 ( default ,'Charlotte', 'Perez', 'charlotte.perez@example.com', 'hashed_password', '2022-12-20', false, 25, 13, 'path/to/image12.jpg'),
 ( default ,'William', 'Torres', 'william.torres@example.com', 'hashed_password', '2023-09-05', false, 25, 4, 'path/to/image13.jpg'),
 ( default ,'Ava', 'Flores', 'ava.flores@example.com', 'hashed_password', '2023-02-10', false, 30, 0, 'path/to/image14.jpg'),
-( default ,'Liam', 'Gomez', 'liam.gomez@example.com', 'hashed_password', '2023-07-25', false, 25, 18, 'path/to/image15.jpg');
+( default ,'Liam', 'Gomez', 'liam.gomez@example.com', 'hashed_password', '2023-07-25', false, 25, 18, 'path/to/image15.jpg'),
+( default ,'saskya', 'Fernandez', 'fernandez@hrmange.com', '$2a$10$7oT/1TC67rDhsFj8hSSuGeXUVSRltwvBEppHEOOi1DvsqVZ/VX9IW', '2022-09-30', false, 30, 30, 'path/to/image15.jpg');
 
 INSERT INTO Roles VALUES
 ( default ,'RH'),
@@ -110,4 +111,4 @@ INSERT INTO holiday VALUES
 (default, 1, '2024-11-15', '2024-11-20',default),
 (default, 2, '2024-12-24', '2024-12-31',default);
 
-SELECT * FROM "holiday" AS "holiday";
+SELECT * FROM users;

@@ -14,7 +14,6 @@
  * @property {string} image
 */
 export class UserDTO {
-
     constructor({ id, firstname, lastname, email, password, role, entryDate, isDeleted, maxHolidays, holidaysLeft, image }) {
         this.id = id;
         this.firstname = firstname;
@@ -27,6 +26,5 @@ export class UserDTO {
         this.maxHolidays = maxHolidays;
         this.holidaysLeft = holidaysLeft;
         this.image = image;
-
     }
 }

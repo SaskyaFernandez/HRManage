@@ -30,7 +30,8 @@ export default (sequelize) => {
             allowNull: false
         },
         isaccepted: {
-            type: DataTypes.BOOLEAN
+            type: DataTypes.STRING,
+            defaultValue: 'neutral',
         }
     }, {
         freezeTableName: true,

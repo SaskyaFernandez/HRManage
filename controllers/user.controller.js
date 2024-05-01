@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs/dist/bcrypt.js";
 import { userRegisterDTO } from "../dto/userRegister.dto.js";
 import usersServices from "../services/users.service.js";
+import rolesServices from "../services/roles.service.js";
 const userController = {
     /**
      * GET /api/users/
@@ -28,7 +29,7 @@ const userController = {
      * @return {userDTO} 200 - User - application/json
      * @return 404 - User not found
      */
-    usersFromId: async (req, res) => {
+    usersById: async (req, res) => {
         try {
             const userId = parseInt(req.params.id);
             const userData = {

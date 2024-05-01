@@ -6,5 +6,6 @@ const holidaysRouter = Router();
 holidaysRouter.get('/all/', holidaysController.allHolidays);
 holidaysRouter.get('/', holidaysController.getById);
 holidaysRouter.post('/', holidaysController.createHoliday);
+holidaysRouter.patch('/', holidaysController.changeHoliday);
 
 export default holidaysRouter;
