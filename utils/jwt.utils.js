@@ -2,8 +2,8 @@ import jwt from 'jsonwebtoken';
 
 const jwtTokenCrypted = (userId, userRole) => {
     let payload = {
-        userId: userId,
-        userRole: userRole
+        userRole: userRole,
+        userId: userId
     }
 
     const token = jwt.sign(
