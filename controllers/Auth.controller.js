@@ -1,14 +1,12 @@
 import { jwtTokenCrypted } from '../utils/jwt.utils.js';
 import usersServices from "../services/users.service.js";
 import bcrypt from 'bcryptjs/dist/bcrypt.js';
-
 /**
  * User
  * @typedef {object} userLogin
  * @property {string} email
  * @property {string} password
 */
-
 const authController = {
     /**
        * POST /api/auth/login/
@@ -19,10 +17,6 @@ const authController = {
     -*/
     login: async (req, res) => {
         try {
-            
-            //! payload => ajouter le role en string ex : "RH"
-            //* faire une enum avec les roles :') 
-            
             const { email, password } = req.body;
             const user = await usersServices.getUserByEmail(email);
             if (!user) {
@@ -34,14 +28,12 @@ const authController = {
             if (!result) {
                 return res.status(401).json({ error: 'Wrong password !' });
             }
-
-            res.status(200).json(jwtTokenCrypted(user.id));
+            let userRole = user.role.map(role => role.firstname)
+            res.status(200).json(jwtTokenCrypted(user.id, userRole));
         } catch (error) {
             res.status(500).json('Internal Server Error');
             return;
         }
     }
 }
-
-
 export default authController;
