@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 
-// ? token generation method
-const jwtTokenCrypted = (userId) => {
+const jwtTokenCrypted = (userId, userRole) => {
     let payload = {
-        userId: userId
+        userId: userId,
+        userRole: userRole
     }
 
     const token = jwt.sign(
@@ -13,7 +13,6 @@ const jwtTokenCrypted = (userId) => {
     return token;
 };
 
-// ? method for decrypting the token
 const jwtTokenDecrypted = (token) => {
     const payload = jwt.verify(
         token.toString(),
