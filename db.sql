@@ -84,7 +84,9 @@ INSERT INTO UserRoles VALUES
 (12, 5, '2022-12-20', NULL),
 (13, 9, '2023-09-05', NULL),
 (14, 7, '2023-02-10', NULL),
-(15, 2, '2023-07-25', NULL);
+(15, 2, '2023-07-25', NULL),
+(16, 1, '2023-07-25', NULL),
+(16, 7, '2023-07-25', NULL);
 
 CREATE TABLE holiday (
 	id int GENERATED ALWAYS AS IDENTITY,
@@ -98,17 +100,17 @@ CREATE TABLE holiday (
 			REFERENCES Users(id),
 	startDate date NOT NULL,
 	endDate date NOT NULL,
-	isaccepted bool 
+	isaccepted VARCHAR(10) CHECK (isaccepted IN ('Approved', 'Pending', 'Rejected')) DEFAULT 'Pending'
 );
 
 INSERT INTO holiday VALUES
-(default, 1, '2024-05-01', '2024-05-03',true),
-(default, 2, '2024-06-10', '2024-06-20',false),
-(default, 3, '2024-07-15', '2024-07-20',true),
+(default, 1, '2024-05-01', '2024-05-03','Approved'),
+(default, 2, '2024-06-10', '2024-06-20','Rejected'),
+(default, 3, '2024-07-15', '2024-07-20','Approved'),
 (default, 1, '2024-08-01', '2024-08-05',default),
-(default, 8, '2024-09-03', '2024-09-10',true),
-(default, 3, '2024-10-20', '2024-10-25',false),
+(default, 8, '2024-09-03', '2024-09-10','Approved'),
+(default, 3, '2024-10-20', '2024-10-25','Rejected'),
 (default, 1, '2024-11-15', '2024-11-20',default),
 (default, 2, '2024-12-24', '2024-12-31',default);
 
-SELECT * FROM users;
+SELECT * FROM holiday;

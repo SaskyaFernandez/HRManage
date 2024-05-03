@@ -100,9 +100,9 @@ const holidaysController = {
     changeHoliday: async (req, res) => {
         try {
             const HolidayRequest = {
-                NEUTRAL: 'neutral',
-                ACCEPT: 'accept',
-                REJECT: 'reject'
+                NEUTRAL: 'Pending',
+                ACCEPT: 'Approved',
+                REJECT: 'Rejected'
             };
 
             const holidayId = req.body.id
@@ -145,7 +145,7 @@ const holidaysController = {
         }
     }
 
-    
+
 };
 
 export default holidaysController;
