@@ -32,7 +32,7 @@ const holidaysController = {
      * @return {holidayDTO} 200 - holidays - application/json
      * @return 404 - Not found
      */
-    getById: async (req, res) => {
+    getByUserId: async (req, res) => {
         try {
             const authHeader = req.headers.authorization;
 
