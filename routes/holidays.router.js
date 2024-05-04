@@ -4,7 +4,7 @@ import holidaysController from '../controllers/holidays.controller.js';
 const holidaysRouter = Router();
 
 holidaysRouter.get('/all/', holidaysController.allHolidays);
-holidaysRouter.get('/', holidaysController.getById);
+holidaysRouter.get('/:id', holidaysController.getByUserId);
 holidaysRouter.post('/', holidaysController.createHoliday);
 holidaysRouter.patch('/', holidaysController.changeHoliday);
 

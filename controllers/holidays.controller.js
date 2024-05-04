@@ -34,14 +34,21 @@ const holidaysController = {
      */
     getByUserId: async (req, res) => {
         try {
-            const authHeader = req.headers.authorization;
+            const getHolidaysByUserId = req.params.id;
 
-            const token = authHeader && authHeader.split(' ')[1];
-            const payload = jwtTokenDecrypted(token);
             const holidaysData = {
-                holidays: await holidaysServices.getByUserId(payload.userId)
+                holidaysByUserID: await holidaysServices.getByUserId(getHolidaysByUserId)
             };
 
+            if (!holidaysData.holidaysByUserID) {
+                res.status(404).json({ error: 'holidays not found!' });
+                return;
+            };
+            
+            if (holidaysData.holidaysByUserID.length == 0) {
+                res.status(404).json({ error: 'This user has no vacation!' });
+                return;
+            };
             res.json(holidaysData);
         } catch (error) {
             res.status(500).json({
