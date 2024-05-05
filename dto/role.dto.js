@@ -8,6 +8,6 @@ export class roleDTO {
 
     constructor({ id, name}) {
         this.id = id;
-        this.firstname = name;
+        this.name = name;
     }
 }

@@ -28,7 +28,7 @@ const authController = {
             if (!result) {
                 return res.status(401).json({ error: 'Wrong password !' });
             }
-            let userRole = user.role.map(role => role.firstname)
+            let userRole = user.role.map(role => role.name)
             res.status(200).json(jwtTokenCrypted(user.id, userRole));
         } catch (error) {
             res.status(500).json('Internal Server Error');
