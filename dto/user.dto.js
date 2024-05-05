@@ -14,17 +14,17 @@
  * @property {string} image
 */
 export class UserDTO {
-    constructor({ id, firstname, lastname, email, password, role, entryDate, isDeleted, maxHolidays, holidaysLeft, image }) {
+    constructor({ id, firstname, lastname, email, password, role, entrydate, isdeleted, maxholidays, holidaysleft, image }) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.entryDate = entryDate;
-        this.isDeleted = isDeleted;
-        this.maxHolidays = maxHolidays;
-        this.holidaysLeft = holidaysLeft;
+        this.entrydate = entrydate;
+        this.isdeleted = isdeleted;
+        this.maxholidays = maxholidays;
+        this.holidaysleft = holidaysleft;
         this.image = image;
     }
 }
