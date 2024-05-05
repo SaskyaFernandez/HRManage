@@ -31,6 +31,17 @@ const rolesServices = {
         } catch (error) {
             throw new Error(error.message);
         }
+    },
+    getRoleByName: async (name) => {
+        try {
+            const role = await db.Roles.findOne({ where: { name: name } });
+            if (!role) {
+                throw new Error('Role not found');
+            }
+            return new roleDTO(role.dataValues);
+        } catch (error) {
+            throw new Error(error.message);
+        }
     }
 };
 

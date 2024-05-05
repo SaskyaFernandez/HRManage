@@ -44,12 +44,28 @@ const userController = {
             res.status(500).json({ error:error.message });
         }
     },
+    userByEmail: async (req, res) => {
+      try {
+          const userEmail = req.params.email;
+          console.log(userEmail);
+          const userData = {
+              userByEmail: await usersServices.getUserByEmail(userEmail)
+          };
+          if (!userData.userByEmail) {
+              res.status(404).json({ error: 'User not found!' });
+              return;
+          }
+          res.json(userData);
+      } catch (error) {
+        res.status(500).json({error: error})
+      }  
+    },
     /**
     * POST /api/users/
     * @summary Register an employee
     * @tags users
     * @param {userRegisterDTO} request.body.required - user - application/json
-    * @return 404 - User not found
+    * @return 404 - User informations not complet
     */
     createUser: async (req, res) => {
         try {
@@ -71,10 +87,14 @@ const userController = {
 
             userDTO.password = await bcrypt.hash(userDTO.password, 10);
 
-            const user = await usersServices.add(userDTO);
-            if (!user) {
-                return res.status(500).json({ error:`User informations not complet`});
-            };
+            let roles = []
+            for (let roleDto of userDTO.role)
+            {
+                roles.push(await rolesServices.getRoleByName(roleDto.name))
+            }
+            userDTO.role = roles
+
+            await usersServices.add(userDTO);
 
             return res.status(200).json({message:`The user has been successfully registered `});
 
