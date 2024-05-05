@@ -74,7 +74,7 @@ const holidaysController = {
             const token = authHeader && authHeader.split(' ')[1];
             const payload = jwtTokenDecrypted(token);
             holidayDTO.userid = payload.userId;
-
+            holidayDTO.isaccepted = "Pending";
             const hollidayExist = await holidaysServices.getByUserIdANDStartDate(holidayDTO.userid, holidayDTO.startdate)
             if (hollidayExist.length > 0) {
                 return res.status(400).json({
