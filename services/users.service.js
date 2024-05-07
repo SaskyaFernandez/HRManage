@@ -7,11 +7,9 @@ const usersServices = {
     add: async (userData) => {
         let user = await db.Users.create(userData);
 
-        if (userData.role && userData.role.length > 0)
-        {
-            for (let role of userData.role)
-            {
-                console.log(role)   
+        if (userData.role && userData.role.length > 0) {
+            for (let role of userData.role) {
+                console.log(role)
                 const userRoleDto = new userRolesDTO({
                     userid: user.id,
                     roleid: role.id,
@@ -22,7 +20,7 @@ const usersServices = {
             }
         }
     },
-    getAll: async () =>{
+    getAll: async () => {
         const users = await db.Users.findAll();
         return users.map(user => new UserDTO({ ...user.dataValues }));
     },
@@ -31,18 +29,18 @@ const usersServices = {
         if (!user) {
             throw new Error('User not found');
         }
-        let roles = await user.getRoles(); 
-        let rolesDTO = roles.map(role => new roleDTO({...role.dataValues}))
+        let roles = await user.getRoles();
+        let rolesDTO = roles.map(role => new roleDTO({ ...role.dataValues }))
         let userParam = {
             ...user.dataValues,
             role: rolesDTO
         };
-        return new UserDTO({...userParam});
+        return new UserDTO({ ...userParam });
     },
     getUserByEmail: async (email) => {
         const user = await db.Users.findOne({ where: { email: email } });
         if (!user) {
-           return null;
+            return null;
         }
         let roles = await user.getRoles();
         let rolesDTO = roles.map(role => new roleDTO({ ...role.dataValues }))
@@ -51,6 +49,24 @@ const usersServices = {
             role: rolesDTO
         };
         return new UserDTO({ ...userParam });
+    },
+    modifyUser: async (user, id) => {
+        try {
+             await db.Users.update(
+                {
+                    firstname: user.firstname,
+                    lastname: user.lastname,
+                    email: user.email,
+                    entrydate: user.entrydate,
+                    isdeleted: user.isdeleted,
+                    maxholidays: user.maxholidays,
+                    holidaysleft: user.holidaysleft,
+                    image : user.image
+                },
+                { where: { id: id } });
+        } catch (error) {
+            throw new Error('Failed to update user: ' + error.message);
+        }
     }
 }
 export default usersServices;
