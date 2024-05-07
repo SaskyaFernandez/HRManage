@@ -20,7 +20,6 @@ app.use(cors(corsOption));
 app.use(express.json()) 
 app.use('/api/auth', authRouter);
 app.use(middlewareAuthentification);
-app.use(middlewareAuthorisation);
 app.use('/api/users', userRouter);
 app.use('/api/holidays', holidaysRouter);
 app.use('/api/roles', rolesRouter);
