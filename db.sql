@@ -37,22 +37,22 @@ CREATE TABLE UserRoles (
 );
 
 INSERT INTO Users VALUES 
-( default ,'John', 'Doe', 'john.doe@example.com', 'hashed_password', '2023-01-15', false, 25, 2, 'path/to/image1.jpg'),
-( default ,'Alice', 'Smith', 'alice.smith@example.com', 'hashed_password', '2022-09-30', false, 30, 12, 'path/to/image2.jpg'),
-( default ,'Michael', 'Johnson', 'michael.johnson@example.com', 'hashed_password', '2023-07-12', false, 20, 10, 'path/to/image3.jpg'),
-( default ,'Emma', 'Brown', 'emma.brown@example.com', 'hashed_password', '2023-02-28', false, 25, 11, 'path/to/image4.jpg'),
-( default ,'David', 'Martinez', 'david.martinez@example.com', 'hashed_password', '2022-11-05', false, 25, 16, 'path/to/image5.jpg'),
-( default ,'Olivia', 'Garcia', 'olivia.garcia@example.com', 'hashed_password', '2023-05-20', false, 30, 8, 'path/to/image6.jpg'),
-( default ,'James', 'Rodriguez', 'james.rodriguez@example.com', 'hashed_password', '2023-03-17', false, 25, 7, 'path/to/image7.jpg'),
-( default ,'Sophia', 'Lopez', 'sophia.lopez@example.com', 'hashed_password', '2023-08-10', false, 20, 15, 'path/to/image8.jpg'),
-( default ,'Alexander', 'Hernandez', 'alexander.hernandez@example.com', 'hashed_password', '2023-04-25', false, 25, 5, 'path/to/image9.jpg'),
-( default ,'Mia', 'Martinez', 'mia.martinez@example.com', 'hashed_password', '2023-01-30', false, 30, 30, 'path/to/image10.jpg'),
-( default ,'Ethan', 'Gonzalez', 'ethan.gonzalez@example.com', 'hashed_password', '2023-06-15', false, 20, 12, 'path/to/image11.jpg'),
-( default ,'Charlotte', 'Perez', 'charlotte.perez@example.com', 'hashed_password', '2022-12-20', false, 25, 13, 'path/to/image12.jpg'),
-( default ,'William', 'Torres', 'william.torres@example.com', 'hashed_password', '2023-09-05', false, 25, 4, 'path/to/image13.jpg'),
-( default ,'Ava', 'Flores', 'ava.flores@example.com', 'hashed_password', '2023-02-10', false, 30, 0, 'path/to/image14.jpg'),
-( default ,'Liam', 'Gomez', 'liam.gomez@example.com', 'hashed_password', '2023-07-25', false, 25, 18, 'path/to/image15.jpg'),
-( default ,'saskya', 'Fernandez', 'fernandez@hrmange.com', '$2a$10$7oT/1TC67rDhsFj8hSSuGeXUVSRltwvBEppHEOOi1DvsqVZ/VX9IW', '2022-09-30', false, 30, 30, 'path/to/image15.jpg');
+( default ,'John', 'Doe', 'john.doe@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-01-15', false, 25, 2, '/3d-illustration-cute-cartoon-boy-with-backpack-his-back.jpg'),
+( default ,'Alice', 'Smith', 'alice.smith@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2022-09-30', false, 30, 12, '/cartoon-character-with-yellow-jacket-sunglasses.jpg'),
+( default ,'Michael', 'Johnson', 'michael.johnson@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-07-12', false, 20, 10, '/3d-illustration-young-man-with-beard-mustache.jpg'),
+( default ,'Emma', 'Brown', 'emma.brown@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-02-28', false, 25, 11, '/cute-doll-with-blue-eyes-white-bathrobe-turban.jpg'),
+( default ,'David', 'Martinez', 'david.martinez@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2022-11-05', false, 25, 16, '/portrait-young-businessman-with-mustache-glasses-3d-rendering.jpg'),
+( default ,'Olivia', 'Garcia', 'olivia.garcia@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-05-20', false, 30, 8, '/cute-girl-with-blond-hair-blue-eyes-3d-rendering.jpg'),
+( default ,'James', 'Rodriguez', 'james.rodriguez@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-03-17', false, 25, 7, '/view-3d-confident-businessman.jpg'),
+( default ,'Sophia', 'Lopez', 'sophia.lopez@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-08-10', false, 20, 15, '/little-fashion-girl-with-bag.jpg'),
+( default ,'Alexander', 'Hernandez', 'alexander.hernandez@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-04-25', false, 25, 5, '/3d-rendering-cute-little-boy-gray-background.jpg'),
+( default ,'Mia', 'Martinez', 'mia.martinez@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-01-30', false, 30, 30, '/9334176.jpg'),
+( default ,'Ethan', 'Gonzalez', 'ethan.gonzalez@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-06-15', false, 20, 12, '/3d-illustration-cute-cartoon-boy-with-backpack-his-back.jpg'),
+( default ,'Charlotte', 'Perez', 'charlotte.perez@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2022-12-20', false, 25, 13, '/3d-illustration-cute-girl-with-brown-hair-brown-coat.jpg'),
+( default ,'William', 'Torres', 'william.torres@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-09-05', false, 25, 4, '/portrait-young-sad-student-being-bullied-school.jpg'),
+( default ,'Ava', 'Flores', 'ava.flores@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-02-10', false, 30, 0, '/3d-illustration-cute-cartoon-woman-with-white-hair-red-dress.jpg'),
+( default ,'Liam', 'Gomez', 'liam.gomez@example.com', '$2a$10$knlS54wLLs8y1AvYWfXMDeXwoNxr3Pj9DnclNlLrzkJcLS9pRkXea', '2023-07-25', false, 25, 18, '/fashion-boy-with-yellow-jacket-blue-pants.jpg'),
+( default ,'saskya', 'Fernandez', 'fernandez@hrmange.com', '$2a$10$7oT/1TC67rDhsFj8hSSuGeXUVSRltwvBEppHEOOi1DvsqVZ/VX9IW', '2022-09-30', false, 30, 30, '/moi.jpg');
 
 INSERT INTO Roles VALUES
 ( default ,'RH'),
@@ -85,8 +85,7 @@ INSERT INTO UserRoles VALUES
 (13, 9, '2023-09-05', NULL),
 (14, 7, '2023-02-10', NULL),
 (15, 2, '2023-07-25', NULL),
-(16, 1, '2023-07-25', NULL),
-(16, 7, '2023-07-25', NULL);
+(16, 1, '2023-07-25', NULL);
 
 CREATE TABLE holiday (
 	id int GENERATED ALWAYS AS IDENTITY,
@@ -107,10 +106,17 @@ INSERT INTO holiday VALUES
 (default, 1, '2024-05-01', '2024-05-03','Approved'),
 (default, 2, '2024-06-10', '2024-06-20','Rejected'),
 (default, 3, '2024-07-15', '2024-07-20','Approved'),
-(default, 1, '2024-08-01', '2024-08-05',default),
+(default, 11, '2024-08-01', '2024-08-05',default),
 (default, 8, '2024-09-03', '2024-09-10','Approved'),
 (default, 3, '2024-10-20', '2024-10-25','Rejected'),
-(default, 1, '2024-11-15', '2024-11-20',default),
-(default, 2, '2024-12-24', '2024-12-31',default);
-
+(default, 5, '2024-11-15', '2024-11-20',default),
+(default, 10, '2024-12-24', '2024-12-31','Approved'),
+(default, 6, '2024-12-24', '2024-12-31',default),
+(default, 9, '2024-12-24', '2024-12-31','Rejected'),
+(default, 12, '2024-12-24', '2024-12-31','Approved'),
+(default, 2, '2024-12-24', '2024-12-31',default),
+(default, 4, '2024-12-24', '2024-12-31','Rejected');
+SELECT * FROM users where id = 10;
+SELECT * FROM userroles;
+SELECT * FROM roles;
 SELECT * FROM holiday;
