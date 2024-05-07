@@ -14,7 +14,7 @@ const holidaysServices = {
         const holidays = await db.Holidays.findAll({ where: { userid: id }, order: [['startdate', 'DESC']] });
         return holidays.map(holiday => new holidayDTO({ ...holiday.dataValues }));
     },
-    getByUserIdANDStartDate: async (userID, startdate) => {
+    getHolidaysByUserIdANDStartDate: async (userID, startdate) => {
         const holidays = await db.Holidays.findAll({
             where: { userid: userID, startdate: startdate },
             order: [['startdate', 'DESC']]
@@ -22,8 +22,8 @@ const holidaysServices = {
         return holidays.map(holiday => new holidayDTO({ ...holiday.dataValues }));
     },
     getByHolidayId: async (holidayId) => {
-        const holidays = await db.Holidays.findAll({ where: { id: holidayId }});
-        return holidays.map(holiday => new holidayDTO({ ...holiday.dataValues }));;
+        const holiday = await db.Holidays.findByPk(holidayId );
+        return new holidayDTO({ ...holiday.dataValues });
     },
     updateHolidayStatus: async (holidayId, newStatus) => {
         const holidays = await db.Holidays.update({ isaccepted: newStatus }, { where: { id: holidayId } });
