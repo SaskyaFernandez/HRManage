@@ -2,6 +2,7 @@ import {
     holidayRequestDTO
 } from "../dto/holidaysRequest.dto.js";
 import holidaysServices from "../services/holidays.service.js";
+import usersServices from "../services/users.service.js";
 import {
     jwtTokenDecrypted
 } from "../utils/jwt.utils.js";
@@ -44,7 +45,7 @@ const holidaysController = {
                 res.status(404).json({ error: 'holidays not found!' });
                 return;
             };
-            
+
             if (holidaysData.holidaysByUserID.length == 0) {
                 res.status(404).json({ error: 'This user has no vacation!' });
                 return;
@@ -60,8 +61,8 @@ const holidaysController = {
      * POST /api/holidays/
      * @summary Register an holiday
      * @tags holidays
-     * @param {holidayRequestDTO} request.body.required - user - application/json
-     * @return 404 - User not found
+     * @param {holidayRequestDTO} request.body.required - holiday - application/json
+     * @return 404 - holiday not found
      */
     createHoliday: async (req, res) => {
         try {
@@ -75,20 +76,21 @@ const holidaysController = {
             const payload = jwtTokenDecrypted(token);
             holidayDTO.userid = payload.userId;
             holidayDTO.isaccepted = "Pending";
-            const hollidayExist = await holidaysServices.getByUserIdANDStartDate(holidayDTO.userid, holidayDTO.startdate)
+            const hollidayExist = await holidaysServices.getHolidaysByUserIdANDStartDate(holidayDTO.userid, holidayDTO.startdate)
             if (hollidayExist.length > 0) {
                 return res.status(400).json({
                     error: "holiday already used"
                 });
             };
-            const user = await holidaysServices.add(holidayDTO);
-            if (!user) {
+            const holiday = await holidaysServices.add(holidayDTO);
+            if (!holiday) {
                 return res.status(500).json({
-                    error: `User informations not complet`
+                    error: `holiday informations not complet`
                 });
             };
+
             return res.status(200).json({
-                message: `The vacation request was successfully registered.`
+                newHoliday: holiday
             });
 
         } catch (error) {
@@ -119,7 +121,7 @@ const holidaysController = {
             }
 
             const holiday = await holidaysServices.getByHolidayId(holidayId);
-            if (holiday.length == 0) {
+            if (!holiday) {
                 return res.status(404).json({ error: "Holiday not found" });
             }
             switch (isaccepted) {
@@ -133,6 +135,10 @@ const holidaysController = {
                 case HolidayRequest.ACCEPT:
                     const holidayAcceptStatus = await holidaysServices.updateHolidayStatus(holidayId, HolidayRequest.ACCEPT);
                     if (holidayAcceptStatus) {
+                        const userId = holiday.userid;
+                        const user = await usersServices.getUserById(userId)
+                        user.holidaysleft =( user.holidaysleft - 1)
+                        await usersServices.modifyUser(user, user.id)
                         return res.status(200).json({ message: "Holiday request accepted successfully" });
                     } else {
                         return res.status(400).json({ message: "Holiday request rejection failed" });
